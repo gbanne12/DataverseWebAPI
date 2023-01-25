@@ -1,5 +1,6 @@
 package bannerga.tests;
 
+import bannerga.dataverse.DeleteRequest;
 import bannerga.dataverse.GetRequest;
 import bannerga.dataverse.PostRequest;
 import net.minidev.json.JSONArray;
@@ -14,7 +15,7 @@ public class WebApiRequestTest {
 
 
     @Test
-    public void canMakeGetRequestForAccount() throws Exception {
+    public void canMakeGetRequestForAccounts() throws Exception {
         // Given
         var entityName = "accounts";
         var filterString = "?$select=name";
@@ -32,7 +33,7 @@ public class WebApiRequestTest {
     }
 
     @Test
-    public void canMakePostRequestForAccounts() throws Exception {
+    public void canMakePostRequestForAccount() throws Exception {
         // Given
         var entityName = "accounts";
         var jsonString = """
@@ -55,5 +56,29 @@ public class WebApiRequestTest {
         var entityId = (String) response.get("entityId");
         assertEquals(204, responseCode, "Server should return '204: No content' for success");
         assertNotNull(entityId, "Server should return ID for new account");
+    }
+
+    @Test
+    public void canMakeDeleteRequestForAccounts() throws Exception {
+        // Given
+        var entityName = "accounts";
+        var jsonString = """
+                {
+                    "@logicalName": "accounts",
+                    "@alias": "accounts",
+                    "name": "Temporary",
+                    "telephone1": "0777 111 1111"
+                }
+                """;
+        var timestamp = String.valueOf(new Timestamp(System.currentTimeMillis()));
+        var requestBody = jsonString.replaceAll("\\bTemporary\\b", timestamp);
+        JSONObject postResponse = new PostRequest().send(entityName, requestBody);
+        var entityUrl = (String) postResponse.get("entityId");
+
+        // When
+        JSONObject deleteResponse = new DeleteRequest().send(entityUrl, null);
+        var responseCode = (int) deleteResponse.get("code");
+        assertEquals(204, responseCode, "Server should return '204: No content' for success");
+
     }
 }

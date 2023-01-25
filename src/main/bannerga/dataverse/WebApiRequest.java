@@ -14,9 +14,9 @@ import java.util.concurrent.Executors;
 
 public interface WebApiRequest {
 
-    JSONObject send(String url, String body) throws IOException;
+    JSONObject send(String uri, String body) throws IOException;
 
-    default String getToken() throws MalformedURLException {
+    default String getToken() {
         var config = ConfigBuilder.build();
         String token;
         ExecutorService service = null;
@@ -26,10 +26,8 @@ public interface WebApiRequest {
             var credential = new ClientCredential(config.clientId(), config.clientSecret());
             AuthenticationResult result = authContext.acquireToken(config.resourceUrl(), credential, null).get();
             token = result.getAccessToken();
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+        } catch (ExecutionException | InterruptedException | MalformedURLException e) {
+            throw new RuntimeException("Failed to get obtain a token. Cannot use the WebApi: " + e);
         } finally {
             assert service != null;
             service.shutdown();

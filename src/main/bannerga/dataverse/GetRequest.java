@@ -38,7 +38,7 @@ public class GetRequest implements WebApiRequest {
         connection.setRequestProperty("OData-Version", "4.0");
         connection.setRequestProperty("Prefer", "odata.include-annotations=*");
         connection.setRequestProperty("Accept", "application/json");
-        connection.setRequestProperty("Authorization", "Bearer " + token);
+        connection.setRequestProperty("Authorization", "Bearer " + getToken());
 
         var json = new JSONObject();
         try {
