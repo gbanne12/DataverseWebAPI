@@ -4,10 +4,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class TestConfig {
+public class ConfigBuilder {
 
 
-    public static Config get() {
+    public static Config build() {
         String fileName = "app.config";
         var properties = new Properties();
         try (FileInputStream stream = new FileInputStream(fileName)) {

@@ -1,6 +1,6 @@
 package bannerga.dataverse;
 
-import bannerga.config.TestConfig;
+import bannerga.config.ConfigBuilder;
 import io.netty.handler.codec.http.HttpMethod;
 import net.minidev.json.JSONObject;
 
@@ -21,7 +21,7 @@ public class PostRequest implements WebApiRequest {
      */
     @Override
     public JSONObject send(String queryString, String body) throws IOException {
-        var config = TestConfig.get();
+        var config = ConfigBuilder.build();
         var url = new URL(config.serviceRoot() + queryString);
         var connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod(HttpMethod.POST.toString());

@@ -1,6 +1,6 @@
 package bannerga.dataverse;
 
-import bannerga.config.TestConfig;
+import bannerga.config.ConfigBuilder;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
@@ -28,7 +28,7 @@ public class GetRequest implements WebApiRequest {
     }
 
     private JSONObject send(String queryString) throws IOException {
-        var config = TestConfig.get();
+        var config = ConfigBuilder.build();
         URL url = new URL(config.serviceRoot() + queryString);
 
         var token = getToken();

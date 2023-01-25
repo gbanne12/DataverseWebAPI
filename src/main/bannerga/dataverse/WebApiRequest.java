@@ -1,6 +1,6 @@
 package bannerga.dataverse;
 
-import bannerga.config.TestConfig;
+import bannerga.config.ConfigBuilder;
 import com.microsoft.aad.adal4j.AuthenticationContext;
 import com.microsoft.aad.adal4j.AuthenticationResult;
 import com.microsoft.aad.adal4j.ClientCredential;
@@ -17,7 +17,7 @@ public interface WebApiRequest {
     JSONObject send(String url, String body) throws IOException;
 
     default String getToken() throws MalformedURLException {
-        var config = TestConfig.get();
+        var config = ConfigBuilder.build();
         String token;
         ExecutorService service = null;
         try {
