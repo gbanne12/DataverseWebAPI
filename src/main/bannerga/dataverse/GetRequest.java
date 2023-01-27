@@ -1,10 +1,10 @@
 package bannerga.dataverse;
 
 import bannerga.config.ConfigBuilder;
+import com.microsoft.aad.msal4j.HttpMethod;
 import net.minidev.json.JSONObject;
 import net.minidev.json.parser.JSONParser;
 import net.minidev.json.parser.ParseException;
-import org.openqa.selenium.remote.http.HttpMethod;
 
 import java.io.BufferedReader;
 import java.io.IOException;

@@ -1,7 +1,7 @@
 package bannerga.dataverse;
 
 import bannerga.config.ConfigBuilder;
-import io.netty.handler.codec.http.HttpMethod;
+import com.microsoft.aad.msal4j.HttpMethod;
 import net.minidev.json.JSONObject;
 
 import java.io.IOException;

@@ -1,7 +1,6 @@
 package bannerga.dataverse;
 
 import bannerga.config.ConfigBuilder;
-import io.netty.handler.codec.http.HttpMethod;
 import net.minidev.json.JSONObject;
 
 import java.io.IOException;
@@ -23,7 +22,7 @@ public class DeleteRequest implements WebApiRequest {
         var url = new URL(entityUrl);
         var connection = (HttpURLConnection) url.openConnection();
 
-        connection.setRequestMethod(HttpMethod.DELETE.toString());
+        connection.setRequestMethod("DELETE");
         connection.setDoOutput(true);
         connection.setRequestProperty("OData-MaxVersion", "4.0");
         connection.setRequestProperty("OData-Version", "4.0");
